@@ -19,6 +19,7 @@
             android:gravity="center_horizontal"
             android:src="@drawable/ic_launcher_background" />
         <EditText
+            android:id="@+id/user_Id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -30,6 +31,7 @@
             android:background="@drawable/shape"/>
 
         <EditText
+            android:id="@+id/user_Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -40,6 +42,7 @@
             android:textAlignment="center"
             android:background="@drawable/shape"/>
         <TextView
+            android:id="@+id/password_Forgot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Forgot Password?"
@@ -49,7 +52,9 @@
             android:textColor="#1637DD"
             android:textStyle="bold"
             />
+
         <Button
+            android:id="@+id/submit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape"
@@ -60,7 +65,42 @@
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/black"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+            android:id="@+id/signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account?"
+            android:textSize="20dp"
+                android:layout_marginTop="15dp"
+            android:textColor="#1D1D1D"
+                />
+            <TextView
+                android:id="@+id/goToSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:textSize="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#1637DD"
+                android:textStyle="bold"
+            />
+
+        </LinearLayout>
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone" />
+
+
 
 
 </LinearLayout>
