@@ -20,19 +20,18 @@
         android:layout_height="wrap_content"
         android:text="CREATE ACCOUNT"
         android:textAlignment="center"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
+        android:textSize="18dp"
         android:textColor="#1637DD"
-        android:padding="15dp"
+        android:padding="10dp"
         android:textStyle="bold"/>
      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-         android:layout_marginTop="25dp"
+         android:layout_marginTop="10dp"
          android:layout_marginLeft="25dp"
          android:layout_marginRight="25dp"
-         android:padding="15dp"
+         android:padding="5dp"
          android:background="@drawable/layoutshape"
 
 
@@ -41,7 +40,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal"
-             android:padding="10dp"
+             android:padding="5dp"
               >
                  <EditText
                      android:id="@+id/edit_Name"
@@ -49,20 +48,18 @@
                      android:layout_height="wrap_content"
                      android:drawableLeft="@drawable/ic_person"
                      android:singleLine="true"
+                     android:inputType="textPersonName"
                      android:hint="Name"
-                     android:inputType="textEmailAddress"
+                     android:ems="10"
                      android:layout_marginLeft="10dp"
                      android:layout_marginRight="10dp"
-
-
                      />
-         </LinearLayout>
-
-             <LinearLayout
+            </LinearLayout>
+            <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:orientation="horizontal"
-                 android:padding="10dp"
+                 android:padding="5dp"
                  >
                  <EditText
                      android:id="@+id/edit_phonenumber"
@@ -71,7 +68,8 @@
                      android:drawableLeft="@drawable/ic_phone"
                      android:singleLine="true"
                      android:hint="Phone No."
-                     android:inputType="textEmailAddress"
+                     android:ems="10"
+                     android:inputType="number"
                      android:layout_marginLeft="10dp"
                      android:layout_marginRight="10dp"
 
@@ -82,7 +80,7 @@
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:orientation="horizontal"
-                     android:padding="10dp"  >
+                     android:padding="5dp"  >
                      <EditText
                          android:id="@+id/edit_Email"
                          android:layout_width="match_parent"
@@ -90,37 +88,20 @@
                          android:drawableLeft="@drawable/ic_mail"
                          android:singleLine="true"
                          android:hint="Email"
+                         android:ems="10"
                          android:inputType="textEmailAddress"
                          android:layout_marginLeft="10dp"
                          android:layout_marginRight="10dp"
                          />
                  </LinearLayout>
 
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:orientation="horizontal"
-                          android:padding="10dp"
 
-                         >
-                         <EditText
-                             android:id="@+id/edit_id"
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:drawableLeft="@drawable/ic_person"
-                             android:singleLine="true"
-                             android:hint="User Id"
-                             android:inputType="textEmailAddress"
-                             android:layout_marginLeft="10dp"
-                             android:layout_marginRight="10dp"
-                             />
-                     </LinearLayout>
 
                          <LinearLayout
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:orientation="horizontal"
-                              android:padding="10dp"
+                              android:padding="5dp"
                              >
                              <EditText
                                  android:id="@+id/edit_Password"
@@ -129,11 +110,41 @@
                                  android:drawableLeft="@drawable/ic_password"
                                  android:singleLine="true"
                                  android:hint="Password"
-                                 android:inputType="textEmailAddress"
+                                 android:ems="10"
+                                 android:inputType="textPassword"
                                  android:layout_marginLeft="10dp"
                                  android:layout_marginRight="10dp"
                                  />
                          </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:padding="5dp"  >
+             <EditText
+                 android:id="@+id/edit_BoxId"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:drawableLeft="@drawable/ic_box"
+                 android:singleLine="true"
+                 android:hint="BoxId"
+                 android:ems="10"
+                 android:inputType="number"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginRight="10dp"
+                 />
+         </LinearLayout>
+
+
+
+
+
+
+
+
+
+
 
          <Button
              android:id="@+id/btn_submit"
@@ -146,9 +157,8 @@
              android:layout_marginTop="15dp"
              android:layout_gravity="center"
              android:textColor="@android:color/white"
-             android:backgroundTint="@android:color/black"/>
+             android:backgroundTint="@android:color/holo_blue_dark"/>
      </LinearLayout>
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="20dp"
@@ -156,10 +166,4 @@
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="20dp"
         android:visibility="gone" />
-
-
-
-
-
-
 </LinearLayout>

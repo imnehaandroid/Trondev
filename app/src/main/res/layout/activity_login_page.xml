@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginPage">
@@ -18,53 +19,66 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:src="@drawable/ic_launcher_background" />
-        <EditText
-            android:id="@+id/user_Id"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:padding="10dp"
-            android:hint="USER ID"
-            android:textAlignment="center"
-            android:background="@drawable/shape"/>
+           >
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_email"
+                android:maxLines="1"
+                android:drawableLeft="@drawable/ic_mail"
+                android:inputType="textEmailAddress"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"/>
 
-        <EditText
-            android:id="@+id/user_Password"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:padding="10dp"
-            android:hint="PASSWORD"
-            android:textAlignment="center"
-            android:background="@drawable/shape"/>
+            app:passwordToggleEnabled="true"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                android:drawableStart="@drawable/ic_password"
+                android:inputType="textPassword"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/password_Forgot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Forgot Password?"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:textColor="#1637DD"
-            android:textStyle="bold"
             />
-
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/btn_submit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape"
             android:text="SUBMIT"
             android:textSize="20dp"
+            android:padding="10dp"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/black"/>
-
+            android:backgroundTint="@android:color/holo_blue_dark"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Don't have an account?"
-            android:textSize="20dp"
+            android:textSize="18dp"
                 android:layout_marginTop="15dp"
             android:textColor="#1D1D1D"
                 />
@@ -84,12 +98,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:layout_marginTop="15dp"
                 android:textColor="#1637DD"
                 android:textStyle="bold"
             />
-
         </LinearLayout>
     </LinearLayout>
     <ProgressBar
