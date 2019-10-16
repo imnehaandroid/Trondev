@@ -7,13 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".SignUpPage"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+     >
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/boxlogo"
          android:layout_marginTop="15dp"
-          android:padding="15dp"
+          android:padding="25dp"
          />
     <TextView
         android:layout_width="match_parent"

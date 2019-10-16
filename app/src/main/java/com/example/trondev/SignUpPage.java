@@ -16,8 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignUpPage extends AppCompatActivity {
     EditText editName;
@@ -28,8 +32,9 @@ public class SignUpPage extends AppCompatActivity {
     Button btnSubmit;
     DatabaseReference databaseReference;
     FirebaseAuth mFirebaseAuth;
-
     ProgressBar progressBar;
+    long maxId=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +48,14 @@ public class SignUpPage extends AppCompatActivity {
         editBoxId=findViewById(R.id.edit_BoxId);
         btnSubmit=findViewById(R.id.btn_submit);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("SignUpData");
+        databaseReference= FirebaseDatabase.getInstance().getReference("User");
+
         mFirebaseAuth=FirebaseAuth.getInstance();
 
 
         initializeUI();
 
-      btnSubmit.setOnClickListener(new View.OnClickListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registerNewUser();
@@ -60,30 +66,36 @@ public class SignUpPage extends AppCompatActivity {
     private void registerNewUser() {
         progressBar.setVisibility(View.VISIBLE);
 
-         final String email,password,name,phonenumber,boxId;
+        final String email,password,name,phonenumber,boxId;
         name =editName.getText().toString();
         phonenumber=editPhoneNumber.getText().toString();
         email = editEmail.getText().toString();
         password = editUserPassword.getText().toString();
         boxId=editBoxId.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(getApplicationContext(),"Please fill in the required fields",Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if(password.length()<6){
+            Toast.makeText(getApplicationContext(),"Password must be at least 6 characters",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(getApplicationContext(), "Please enter name...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(phonenumber)) {
-            Toast.makeText(getApplicationContext(), "Please enter phonenumber!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(boxId)){
-            Toast.makeText(getApplicationContext(), "Please enter boxId!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
 
         }
@@ -95,11 +107,12 @@ public class SignUpPage extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            SignUpData information = new SignUpData(
+                            User information = new User(
                                     name,email,boxId
                             );
+                            databaseReference.child(String.valueOf(maxId+1)).setValue(information);
 
-                            FirebaseDatabase.getInstance().getReference("SignUpData")
+                            FirebaseDatabase.getInstance().getReference("User")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -121,7 +134,24 @@ public class SignUpPage extends AppCompatActivity {
                         }
                     }
                 });
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists())
+                    maxId =(dataSnapshot.getChildrenCount());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
+
 
     private void initializeUI() {
         editName= findViewById(R.id.edit_Name);

@@ -6,19 +6,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".LoginPage">
+    tools:context=".LoginPage"
+    >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:src="@drawable/boxlogo"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:src="@drawable/ic_launcher_background" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
@@ -78,7 +81,7 @@
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/holo_blue_dark"/>
+            android:backgroundTint="@android:color/black"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,6 +108,15 @@
             />
         </LinearLayout>
     </LinearLayout>
+
+
+      <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        />
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="20dp"

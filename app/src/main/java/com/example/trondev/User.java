@@ -1,14 +1,14 @@
 package com.example.trondev;
 
-public class SignUpData {
+public class User {
     private String name,email,boxId;
 
 
-    public SignUpData(){
+    public User(){
 
     }
 
-    public SignUpData(String name,String email,String boxId) {
+    public User(String name, String email, String boxId) {
         this.name = name;
         this.email = email;
         this.boxId=boxId;
