@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,10 +31,12 @@ public class SignUpPage extends AppCompatActivity {
     EditText editBoxId;
     EditText editUserPassword;
     Button btnSubmit;
+    TextView goTologin;
     DatabaseReference databaseReference;
     FirebaseAuth mFirebaseAuth;
     ProgressBar progressBar;
-    long maxId=0;
+
+
 
 
     @Override
@@ -42,18 +45,28 @@ public class SignUpPage extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_page);
 
 
-        editPhoneNumber=findViewById(R.id.edit_phonenumber);
-        editEmail=findViewById(R.id.edit_Email);
-        editUserPassword=findViewById(R.id.edit_Password);
-        editBoxId=findViewById(R.id.edit_BoxId);
+        editPhoneNumber=findViewById(R.id.edit_phone);
+        editEmail=findViewById(R.id.edit_email);
+        editUserPassword=findViewById(R.id.edit_password);
+        editBoxId=findViewById(R.id.edit_boxId);
         btnSubmit=findViewById(R.id.btn_submit);
-
-        databaseReference= FirebaseDatabase.getInstance().getReference("User");
+        goTologin=findViewById(R.id.goToLogin);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
 
 
         initializeUI();
+
+
+        goTologin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToLogpage = new Intent(SignUpPage.this,LoginPage.class);
+                startActivity(goToLogpage);
+
+            }
+        });
+        
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,23 +79,23 @@ public class SignUpPage extends AppCompatActivity {
     private void registerNewUser() {
         progressBar.setVisibility(View.VISIBLE);
 
-        final String email,password,name,phonenumber,boxId;
-        name =editName.getText().toString();
-        phonenumber=editPhoneNumber.getText().toString();
+        final String email, password, name, phonenumber, boxId;
+        name = editName.getText().toString();
+        phonenumber = editPhoneNumber.getText().toString();
         email = editEmail.getText().toString();
         password = editUserPassword.getText().toString();
-        boxId=editBoxId.getText().toString();
+        boxId = editBoxId.getText().toString();
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
         }
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(getApplicationContext(),"Please fill in the required fields",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(password.length()<6){
-            Toast.makeText(getApplicationContext(),"Password must be at least 6 characters",Toast.LENGTH_SHORT).show();
+        if (password.length() < 6) {
+            Toast.makeText(getApplicationContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -94,7 +107,7 @@ public class SignUpPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
         }
-        if(TextUtils.isEmpty(boxId)){
+        if (TextUtils.isEmpty(boxId)) {
             Toast.makeText(getApplicationContext(), "Please fill in the required fields", Toast.LENGTH_LONG).show();
             return;
 
@@ -107,10 +120,7 @@ public class SignUpPage extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            User information = new User(
-                                    name,email,boxId
-                            );
-                            databaseReference.child(String.valueOf(maxId+1)).setValue(information);
+                            User information = new User(name, email, boxId);
 
                             FirebaseDatabase.getInstance().getReference("User")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -121,44 +131,26 @@ public class SignUpPage extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                                     progressBar.setVisibility(View.GONE);
 
-                                    Intent intent = new Intent(SignUpPage.this,LoginPage.class);
+                                    Intent intent = new Intent(SignUpPage.this, LoginPage.class);
                                     startActivity(intent);
 
                                 }
                             });
 
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.exists())
-                    maxId =(dataSnapshot.getChildrenCount());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
     }
-
-
     private void initializeUI() {
-        editName= findViewById(R.id.edit_Name);
-        editUserPassword = findViewById(R.id.edit_Password);
-        editPhoneNumber=findViewById(R.id.edit_phonenumber);
-        editEmail=findViewById(R.id.edit_Email);
-        editBoxId=findViewById(R.id.edit_BoxId);
+        editName= findViewById(R.id.edit_name);
+        editUserPassword = findViewById(R.id.edit_password);
+        editPhoneNumber=findViewById(R.id.edit_phone);
+        editEmail=findViewById(R.id.edit_email);
+        editBoxId=findViewById(R.id.edit_boxId);
         btnSubmit = findViewById(R.id.btn_submit);
         progressBar = findViewById(R.id.progressBar);
     }

@@ -3,5 +3,8 @@
     <string name="failed">Failed</string>
     <string name="hint_password">Password</string>
     <string name="hint_email">Email</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_phonenumber">Phone No.</string>
+    <string name="hint_box">BoxId</string>
 
 </resources>
