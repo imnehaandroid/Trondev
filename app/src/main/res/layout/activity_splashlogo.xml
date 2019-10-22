@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".Splashlogo"
     android:orientation="vertical">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/boxlogo"
+        android:src="@drawable/customback"
         android:layout_gravity="center"
 
 
-       />
 
-
+        />
 </LinearLayout>

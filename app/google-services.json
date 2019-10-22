@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "129801509899",
-    "firebase_url": "https://trondev-5a2c2.firebaseio.com",
-    "project_id": "trondev-5a2c2",
-    "storage_bucket": "trondev-5a2c2.appspot.com"
+    "project_number": "808773073050",
+    "firebase_url": "https://trondev-bf192.firebaseio.com",
+    "project_id": "trondev-bf192",
+    "storage_bucket": "trondev-bf192.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:129801509899:android:00d45b7fbfee620280bb0e",
+        "mobilesdk_app_id": "1:808773073050:android:ecde419329b1e82af64723",
         "android_client_info": {
           "package_name": "com.example.trondev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "129801509899-nnpg312lk17bskb3i408q9b1gioirq3g.apps.googleusercontent.com",
+          "client_id": "808773073050-sqqa7l5ckljttstlgp647a18k7slvn0m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.trondev",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "129801509899-47e7ajv0vuev364bt6n40q64iiefi9k3.apps.googleusercontent.com",
+          "client_id": "808773073050-fschhs28f1t1jibk09pro3q0ug8adaei.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBvul0Y7goGMUc6TdOWJ8FSwAGr4j7nyso"
+          "current_key": "AIzaSyDCdIYWANHlsK4u929iYFuOc_V5uELYd68"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "129801509899-47e7ajv0vuev364bt6n40q64iiefi9k3.apps.googleusercontent.com",
+              "client_id": "808773073050-fschhs28f1t1jibk09pro3q0ug8adaei.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

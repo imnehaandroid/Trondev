@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +7,62 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:layout_marginTop="15dp"
+            android:padding="25dp"
+            android:src="@drawable/parcellogo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:padding="5dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_orderId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_orderId"
+                    android:maxLines="1"
+                    android:drawableLeft="@drawable/ic_orderid"
+                    android:inputType="number"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ToggleButton
+                android:id="@+id/tb1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton 1"
+                android:layout_margin="20dp"
+                android:textOff="Off"
+                android:textOn="On"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:background="#1637DD" />
 
 
-</LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_progress_bar" />
+</FrameLayout>

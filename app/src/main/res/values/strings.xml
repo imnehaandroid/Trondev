@@ -6,5 +6,10 @@
     <string name="hint_name">Name</string>
     <string name="hint_phonenumber">Phone No.</string>
     <string name="hint_box">BoxId</string>
+    <string name="hint_orderId">OrderId</string>
+
+    <string name="text_forgot_password">Forgot Password?</string>
+
+
 
 </resources>
