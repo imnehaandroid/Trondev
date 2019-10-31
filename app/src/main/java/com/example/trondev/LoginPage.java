@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -75,6 +76,15 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View v) {
                 String email = userId.getText().toString();
                 String password = userPassword.getText().toString();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Please enter Email...", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
                     userId.setError("Invalid Email");
@@ -188,6 +198,9 @@ public class LoginPage extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
 
 

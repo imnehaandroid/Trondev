@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendOtpPage"
+    android:orientation="vertical"
+    >
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="92dp"
+           android:layout_marginTop="15dp"
+           android:padding="25dp"
+           android:src="@drawable/parcellogo" />
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Verification Code"
+           android:textSize="25dp"
+           android:textColor="@android:color/black"
+           android:gravity="center"
+           android:padding="10dp"
+           />
+
+       <EditText
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="15dp"
+           android:hint="@string/enter_the_verification_code"
+
+           />
+
+   </LinearLayout>
+
+</FrameLayout>

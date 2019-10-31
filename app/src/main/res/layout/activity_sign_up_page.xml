@@ -142,7 +142,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape"
-            android:text="SUBMIT"
+            android:text="Continue"
             android:textSize="18dp"
             android:padding="10dp"
             android:layout_marginTop="15dp"

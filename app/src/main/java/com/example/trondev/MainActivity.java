@@ -60,17 +60,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFirebaseData() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("$");
-        stringBuilder.append(boxId);
-        stringBuilder.append(",");
+      //  stringBuilder.append("$");
+      //  stringBuilder.append(boxId);
+     //   stringBuilder.append(",");
         String orderId;
 
         if (toggleValue == 1) {
             orderId = orderIdEt.getText().toString();
             stringBuilder.append(orderId.substring(orderId.length() - 4));
+            stringBuilder.append("@");
             stringBuilder.append(",");
+
+
         } else {
             stringBuilder.append("####");
+            stringBuilder.append("@");
             stringBuilder.append(",");
         }
         stringBuilder.append(toggleValue);
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Neha", stringBuilder.toString());
 
         progressBar.setVisibility(View.VISIBLE);
-        databaseReference.child(uuID).push().setValue(stringBuilder.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+        databaseReference.child(uuID).setValue(stringBuilder.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 progressBar.setVisibility(View.GONE);
