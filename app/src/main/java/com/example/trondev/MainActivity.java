@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,8 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
     private static final String BOX_ID_KEY = "box_id";
     private static final String UUID_KEY = "uuid";
+
     EditText orderIdEt;
     ToggleButton toggleButton;
+    Button setOrder;
 
     private String boxId, uuID;
     private int toggleValue = -1;
@@ -36,12 +39,26 @@ public class MainActivity extends AppCompatActivity {
 
         orderIdEt = findViewById(R.id.edit_orderId);
         toggleButton = findViewById(R.id.tb1);
+        setOrder=findViewById(R.id.set_orderId);
         progressBar = findViewById(R.id.progressBar);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("boxes");
 
         boxId = getIntent().getExtras().getString(BOX_ID_KEY);
         uuID = getIntent().getExtras().getString(UUID_KEY);
+
+        setOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    String edtext1 =orderIdEt.getText().toString();
+                    String edtext2 = orderIdEt.getText().toString();
+                    String edtext3 = orderIdEt.getText().toString();
+                    databaseReference.setValue(edtext1);
+                    databaseReference.setValue(edtext2);
+                    databaseReference.setValue(edtext3);
+            }
+        });
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -50,12 +67,11 @@ public class MainActivity extends AppCompatActivity {
                     toggleValue = 1;
                 } else {
                     toggleValue = 0;
+
                 }
                 setFirebaseData();
             }
         });
-
-
     }
 
     private void setFirebaseData() {
@@ -70,13 +86,12 @@ public class MainActivity extends AppCompatActivity {
             stringBuilder.append(orderId.substring(orderId.length() - 4));
             stringBuilder.append("@");
             stringBuilder.append(",");
-
-
         } else {
             stringBuilder.append("####");
             stringBuilder.append("@");
             stringBuilder.append(",");
         }
+
         stringBuilder.append(toggleValue);
 
         Log.e("Neha", stringBuilder.toString());
@@ -93,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Parcel box is close", Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(MainActivity.this, "In Failure", Toast.LENGTH_SHORT).show();
+
             }
+
         });
 
 

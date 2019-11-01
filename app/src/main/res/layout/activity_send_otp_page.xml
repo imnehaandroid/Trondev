@@ -33,9 +33,23 @@
            android:layout_height="wrap_content"
            android:layout_margin="15dp"
            android:hint="@string/enter_the_verification_code"
+           android:textAlignment="center"
+           android:padding="10dp"
 
            />
+       <Button
+           android:id="@+id/btn_submit"
+           android:layout_width="200dp"
+           android:layout_height="wrap_content"
+           android:background="@drawable/shape"
+           android:text="Submit"
+           android:textSize="18dp"
+           android:padding="10dp"
+           android:layout_marginTop="15dp"
+           android:layout_gravity="center"
+           android:textColor="@android:color/white"
+           android:backgroundTint="@android:color/black" />
 
    </LinearLayout>
-
+    <include layout="@layout/layout_progress_bar" />
 </FrameLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="edit_orderId" type="id"/>
+    <item name="tb1" type="id"/>
+    <item name="set_orderId" type="id"/>
+</resources>

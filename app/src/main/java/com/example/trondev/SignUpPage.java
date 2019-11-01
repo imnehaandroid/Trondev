@@ -17,13 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SignUpPage extends AppCompatActivity {
-    EditText editName, editPhoneNumber, editEmail, editBoxId, editUserPassword;
+    EditText editName, editEmail, editBoxId, editUserPassword;
+    private EditText editPhoneNumber;
     Button btnSubmit;
     TextView goTologin;
     FirebaseAuth mAuth;
@@ -49,7 +49,7 @@ public class SignUpPage extends AppCompatActivity {
         goTologin = findViewById(R.id.goToLogin);
 
 
-        initializeUI();
+         initializeUI();
 
         goTologin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,10 @@ public class SignUpPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerNewUser();
+
             }
+
+
         });
     }
 
@@ -85,9 +88,11 @@ public class SignUpPage extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(phonenumber)) {
+
             Toast.makeText(getApplicationContext(), "Please enter phone number!", Toast.LENGTH_LONG).show();
             return;
         }
+
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter Email...", Toast.LENGTH_LONG).show();
             return;
@@ -142,6 +147,7 @@ public class SignUpPage extends AppCompatActivity {
         editBoxId = findViewById(R.id.edit_BoxId);
         btnSubmit = findViewById(R.id.btn_submit);
         progressBar = findViewById(R.id.progressBar);
+
     }
 }
 
