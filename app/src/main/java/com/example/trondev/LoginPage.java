@@ -117,6 +117,7 @@ public class LoginPage extends AppCompatActivity {
                                                 Intent intent = new Intent(LoginPage.this, MainActivity.class);
                                                 intent.putExtra(BOX_ID_KEY, userData.get("boxId").getAsString());
                                                 intent.putExtra(UUID_KEY, mAuth.getUid());
+                                                // boxId and uuid ko send
                                                 startActivity(intent);
 
                                                 progressBar.setVisibility(View.GONE);

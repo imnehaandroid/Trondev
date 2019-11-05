@@ -39,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         orderIdEt = findViewById(R.id.edit_orderId);
         toggleButton = findViewById(R.id.tb1);
-        setOrder=findViewById(R.id.set_orderId);
+        setOrder = findViewById(R.id.set_orderId);
         progressBar = findViewById(R.id.progressBar);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("boxes");
 
         boxId = getIntent().getExtras().getString(BOX_ID_KEY);
         uuID = getIntent().getExtras().getString(UUID_KEY);
@@ -50,15 +48,24 @@ public class MainActivity extends AppCompatActivity {
         setOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                databaseReference = FirebaseDatabase.getInstance().getReference("orderIds");
+                progressBar.setVisibility(View.VISIBLE);
 
-                    String edtext1 =orderIdEt.getText().toString();
-                    String edtext2 = orderIdEt.getText().toString();
-                    String edtext3 = orderIdEt.getText().toString();
-                    databaseReference.setValue(edtext1);
-                    databaseReference.setValue(edtext2);
-                    databaseReference.setValue(edtext3);
-            }
-        });
+                databaseReference.child(uuID).push().setValue(orderIdEt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                                 Toast.makeText(MainActivity.this,"OrderId Set",Toast.LENGTH_SHORT).show();
+
+                                } else
+                                    Toast.makeText(MainActivity.this, "In Failure", Toast.LENGTH_SHORT).show();
+
+                           }
+
+                           });
+                        }
+              });
 
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -73,12 +80,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void setFirebaseData() {
+      private void setFirebaseData() {
         StringBuilder stringBuilder = new StringBuilder();
-      //  stringBuilder.append("$");
-      //  stringBuilder.append(boxId);
-     //   stringBuilder.append(",");
+        //  stringBuilder.append("$");
+        //  stringBuilder.append(boxId);
+        //   stringBuilder.append(",");
         String orderId;
 
         if (toggleValue == 1) {
@@ -95,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         stringBuilder.append(toggleValue);
 
         Log.e("Neha", stringBuilder.toString());
+        databaseReference = FirebaseDatabase.getInstance().getReference("boxes");
 
         progressBar.setVisibility(View.VISIBLE);
         databaseReference.child(uuID).setValue(stringBuilder.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -106,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Parcel box is open", Toast.LENGTH_SHORT).show();
                     else
                         Toast.makeText(MainActivity.this, "Parcel box is close", Toast.LENGTH_SHORT).show();
-                }else
+                } else
                     Toast.makeText(MainActivity.this, "In Failure", Toast.LENGTH_SHORT).show();
 
             }
