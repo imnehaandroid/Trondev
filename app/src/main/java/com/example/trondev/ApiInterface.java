@@ -10,4 +10,7 @@ public interface ApiInterface {
 
     @GET("/user/{name}.json")
     Call<JsonObject> getUserData(@Path("name") String name);
+
+    @GET("user/{uuid}/{key}.json")
+    Call<JsonObject> getUserOIds(@Path("uuid") String uuid, @Path("key") String key);
 }

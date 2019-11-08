@@ -29,8 +29,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginPage extends AppCompatActivity {
-    private static final String BOX_ID_KEY = "box_id";
+    private static final String BOX_STATUS_KEY = "bo_xstatus";
     private static final String UUID_KEY = "uuid";
+    private static final String ORDER_ID_EXISTS = "order_id_exists";
     EditText userId, userPassword;
     TextView forgotPassword, goToSignUp;
     Button submit;
@@ -115,9 +116,14 @@ public class LoginPage extends AppCompatActivity {
                                                 JsonObject userData = response.body();
 
                                                 Intent intent = new Intent(LoginPage.this, MainActivity.class);
-                                                intent.putExtra(BOX_ID_KEY, userData.get("boxId").getAsString());
-                                                intent.putExtra(UUID_KEY, mAuth.getUid());
-                                                // boxId and uuid ko send
+
+                                                Bundle bundle = new Bundle();
+                                        //      bundle.putString(BOX_STATUS_KEY, userData.get("boxStatus").getAsString());
+                                                bundle.putString(UUID_KEY, mAuth.getUid());
+                                                bundle.putBoolean(ORDER_ID_EXISTS, userData.has("orderIds"));
+                                                intent.putExtras(bundle);
+
+                                                // boxId and uuid  send
                                                 startActivity(intent);
 
                                                 progressBar.setVisibility(View.GONE);

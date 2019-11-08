@@ -41,15 +41,7 @@ public class SignUpPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        editPhoneNumber = findViewById(R.id.edit_Phone);
-        editEmail = findViewById(R.id.edit_Email);
-        editUserPassword = findViewById(R.id.edit_Password);
-        editBoxId = findViewById(R.id.edit_BoxId);
-        btnSubmit = findViewById(R.id.btn_submit);
-        goTologin = findViewById(R.id.goToLogin);
-
-
-         initializeUI();
+        initializeUI();
 
         goTologin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,12 +105,10 @@ public class SignUpPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-                            User information = new User(name, email, phonenumber, boxId);
-
+                            String boxStatus = "####@,0";
+                            User information = new User(name, email, phonenumber, boxId, boxStatus);
                             FirebaseUser user = mAuth.getCurrentUser();
-                            databaseReference.child(user.getUid())
-                                    .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
@@ -127,6 +117,7 @@ public class SignUpPage extends AppCompatActivity {
 
                                     Intent intent = new Intent(SignUpPage.this, LoginPage.class);
                                     startActivity(intent);
+                                    finish();
 
                                 }
                             });
@@ -146,6 +137,7 @@ public class SignUpPage extends AppCompatActivity {
         editEmail = findViewById(R.id.edit_Email);
         editBoxId = findViewById(R.id.edit_BoxId);
         btnSubmit = findViewById(R.id.btn_submit);
+        goTologin = findViewById(R.id.goToLogin);
         progressBar = findViewById(R.id.progressBar);
 
     }
