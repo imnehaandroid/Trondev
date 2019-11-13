@@ -30,10 +30,8 @@ public class SignUpPage extends AppCompatActivity {
     Button btnContinue;
     TextView goTologin;
     FirebaseAuth mAuth;
-    private Spinner spinner;
     DatabaseReference databaseReference;
     LinearLayout progressBar;
-    //String no;
 
 
     @Override
@@ -42,13 +40,7 @@ public class SignUpPage extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_page);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
-
         mAuth = FirebaseAuth.getInstance();
-        editPhoneNumber = findViewById(R.id.edit_Phone);
-        spinner=findViewById(R.id.spinnerCountries);
-        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, CountryData.countryNames));
-
-
         initializeUI();
 
         goTologin.setOnClickListener(new View.OnClickListener() {
@@ -63,45 +55,7 @@ public class SignUpPage extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                     registerNewUser();
-
-             /*   no = editPhoneNumber.getText().toString();
-                validNo(no);
-                Intent intent = new Intent(SignUpPage.this, SendOtpPage.class);
-                intent.putExtra("mobile", no);
-                startActivity(intent);
-                Toast.makeText(SignUpPage.this, no, Toast.LENGTH_LONG).show();
-
-
-            }
-
-
-        });
-    }
-
-    private void validNo(String no) {
-        if (no.isEmpty() || no.length() < 10) {
-            editPhoneNumber.setError("Enter a valid mobile");
-            editPhoneNumber.requestFocus();
-            return;
-
-        }*/
-
-                String code = CountryData.countryAreaCodes[spinner.getSelectedItemPosition()];
-
-                String number = editPhoneNumber.getText().toString().trim();
-
-                if (number.isEmpty() || number.length() < 10) {
-                    editPhoneNumber.setError("Valid number is required");
-                    editPhoneNumber.requestFocus();
-                    return;
-                }
-
-                String phonenumber = "+" + code + number;
-
-                Intent intent = new Intent(SignUpPage.this, SendOtpPage.class);
-                intent.putExtra("phonenumber", phonenumber);
-                startActivity(intent);
+                registerNewUser();
 
             }
         });
@@ -150,28 +104,38 @@ public class SignUpPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            String boxStatus = "####@,0";
-                            User information = new User(name, email, phonenumber, boxId, boxStatus);
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
 
-                                   // Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
-                                    progressBar.setVisibility(View.GONE);
+                                        String boxStatus = "####@,0";
+                                        User information = new User(name, email, phonenumber, boxId, boxStatus);
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
-                                  //  finish();
+                                                Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility(View.GONE);
 
-                                }
-                            });
+                                                finish();
+                                            }
+                                        });
 
-                        } else {
-                           // Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
+                                    } else {
+                                        Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                           }
+                                       }
+                                 });
+                           } else {
+                            Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
                         }
                     }
                 });
     }
+
 
     private void initializeUI() {
         editName = findViewById(R.id.edit_Name);
@@ -184,9 +148,11 @@ public class SignUpPage extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
     }
-
-
 }
+
+
+
+
 
 
 
