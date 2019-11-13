@@ -29,9 +29,11 @@
            />
 
        <EditText
+           android:id="@+id/otp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="15dp"
+           android:ems="10"
            android:hint="@string/enter_the_verification_code"
            android:textAlignment="center"
            android:padding="10dp"
