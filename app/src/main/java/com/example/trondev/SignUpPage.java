@@ -62,7 +62,7 @@ public class SignUpPage extends AppCompatActivity {
     }
 
 
-    private String email, password, name, phonenumber, boxId;
+    private String email, name, phonenumber, boxId;
 
     private void registerNewUser() {
         progressBar.setVisibility(View.VISIBLE);
@@ -71,7 +71,7 @@ public class SignUpPage extends AppCompatActivity {
         name = editName.getText().toString();
         phonenumber = editPhoneNumber.getText().toString();
         email = editEmail.getText().toString();
-        password = editUserPassword.getText().toString();
+        String password = editUserPassword.getText().toString();
         boxId = editBoxId.getText().toString();
 
         if (TextUtils.isEmpty(name)) {
@@ -104,38 +104,42 @@ public class SignUpPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
+                            if (mAuth.getCurrentUser() != null) {
+                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
 
-                                        String boxStatus = "####@,0";
-                                        User information = new User(name, email, phonenumber, boxId, boxStatus);
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
+                                            String boxStatus = "####@,0";
+                                            User information = new User(name, email, phonenumber, boxId, boxStatus);
+                                            FirebaseUser user = mAuth.getCurrentUser();
+                                            databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
 
-                                                Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
+                                                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                                                    progressBar.setVisibility(View.GONE);
 
-                                                finish();
+                                                    finish();
+                                                }
+                                            });
+
+                                        } else {
+                                            if (task.getException() != null) {
+                                                Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                             }
-                                        });
-
-                                    } else {
-                                        Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                           }
-                                       }
-                                 });
-                           } else {
-                            Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+                            if (task.getException() != null) {
+                                Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });
     }
-
 
     private void initializeUI() {
         editName = findViewById(R.id.edit_Name);
