@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static String BASE_URL = "https://trondev-bf192.firebaseio.com";
+    private static String BASE_URL = "https://trondev-e73ab.firebaseio.com";
 
     private static Retrofit retrofit = null;
 

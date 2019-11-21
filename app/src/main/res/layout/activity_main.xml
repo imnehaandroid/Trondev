@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_orderId"
-                    android:maxLines="1"
+                    android:minLines="1"
                     android:lines="1"
                     android:drawableLeft="@drawable/ic_orderid"
                     android:layout_marginRight="15dp"
@@ -68,7 +68,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-              />
+                />
 
 
         </LinearLayout>

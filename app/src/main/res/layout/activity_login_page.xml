@@ -71,8 +71,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center|right"
                 android:text="@string/text_forgot_password"
-                android:textColor="@color/blue"
-                android:textSize="15dp" />
+                android:textColor="#1637DD"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
 
 
             <Button
@@ -113,6 +114,8 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+
 
 
         </LinearLayout>

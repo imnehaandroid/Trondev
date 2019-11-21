@@ -3,6 +3,7 @@ package com.example.trondev;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -65,14 +66,13 @@ public class SignUpPage extends AppCompatActivity {
     private String email, name, phonenumber, boxId;
 
     private void registerNewUser() {
-        progressBar.setVisibility(View.VISIBLE);
 
 
-        name = editName.getText().toString();
-        phonenumber = editPhoneNumber.getText().toString();
-        email = editEmail.getText().toString();
-        String password = editUserPassword.getText().toString();
-        boxId = editBoxId.getText().toString();
+        name = editName.getText().toString().trim();
+        phonenumber = editPhoneNumber.getText().toString().trim();
+        email = editEmail.getText().toString().trim();
+        String password = editUserPassword.getText().toString().trim();
+        boxId = editBoxId.getText().toString().trim();
 
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(getApplicationContext(), "Please enter name...", Toast.LENGTH_LONG).show();
@@ -81,22 +81,34 @@ public class SignUpPage extends AppCompatActivity {
         if (TextUtils.isEmpty(phonenumber)) {
 
             Toast.makeText(getApplicationContext(), "Please enter phone number!", Toast.LENGTH_LONG).show();
-            return;
+            return ;
         }
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter Email...", Toast.LENGTH_LONG).show();
             return;
         }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
+            editEmail.setError("Invalid Email");
+            editEmail.setFocusable(true);
+        }
+
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
             return;
         }
+        if (password.length() < 6) {
+            Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (TextUtils.isEmpty(boxId)) {
             Toast.makeText(getApplicationContext(), "Please enter boxId!", Toast.LENGTH_LONG).show();
             return;
 
         }
+        progressBar.setVisibility(View.VISIBLE);
 
 
         mAuth.createUserWithEmailAndPassword(email, password)
