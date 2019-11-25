@@ -81,7 +81,7 @@ public class SignUpPage extends AppCompatActivity {
         if (TextUtils.isEmpty(phonenumber)) {
 
             Toast.makeText(getApplicationContext(), "Please enter phone number!", Toast.LENGTH_LONG).show();
-            return ;
+            return;
         }
 
         if (TextUtils.isEmpty(email)) {
@@ -121,15 +121,14 @@ public class SignUpPage extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-
-                                            String boxStatus = "####@,0";
+                                            sendEmailVerification();
+                                            String boxStatus = "aaaa@,0";
                                             User information = new User(name, email, phonenumber, boxId, boxStatus);
                                             FirebaseUser user = mAuth.getCurrentUser();
                                             databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-
-                                                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                                                    //  Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                                                     progressBar.setVisibility(View.GONE);
 
                                                     finish();
@@ -137,10 +136,11 @@ public class SignUpPage extends AppCompatActivity {
                                             });
 
                                         } else {
-                                            if (task.getException() != null) {
-                                                Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                            }
+
+                                            Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
+                                            progressBar.setVisibility(View.GONE);
                                         }
+
                                     }
                                 });
                             }
@@ -162,8 +162,29 @@ public class SignUpPage extends AppCompatActivity {
         btnContinue = findViewById(R.id.btn_continue);
         goTologin = findViewById(R.id.goToLogin);
         progressBar = findViewById(R.id.progressBar);
+    }
+
+    private void sendEmailVerification() {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+
+                        Toast.makeText(SignUpPage.this, "Registration successful,Verification mail send !", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(SignUpPage.this, LoginPage.class));
+                    } else {
+                        Toast.makeText(SignUpPage.this, "verification mail hasn't been send", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
 
     }
+
 }
 
 

@@ -18,6 +18,7 @@ import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonObject;
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             stringBuilder.append("@");
             stringBuilder.append(",");
         } else {
-            stringBuilder.append("####");
+            stringBuilder.append("aaaa");
             stringBuilder.append("@");
             stringBuilder.append(",");
         }
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e("Neha", stringBuilder.toString());
         databaseReference = FirebaseDatabase.getInstance().getReference("user").child(uuID).child("boxStatus");
-
+        
         progressBar.setVisibility(View.VISIBLE);
         databaseReference.setValue(stringBuilder.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

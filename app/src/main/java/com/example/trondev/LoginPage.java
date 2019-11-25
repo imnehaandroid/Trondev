@@ -103,41 +103,7 @@ public class LoginPage extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-                                    Log.e("Neha", mAuth.getUid());
-
-                                    Call<JsonObject> call = apiInterface.getUserData(mAuth.getUid());
-                                    Log.e("Neha", call.request().url().toString());
-                                    call.enqueue(new Callback<JsonObject>() {
-                                        @Override
-                                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
-                                            if (response.isSuccessful()){
-
-                                                JsonObject userData = response.body();
-
-                                                Intent intent = new Intent(LoginPage.this, MainActivity.class);
-
-                                                Bundle bundle = new Bundle();
-                                        //      bundle.putString(BOX_STATUS_KEY, userData.get("boxStatus").getAsString());
-                                                bundle.putString(UUID_KEY, mAuth.getUid());
-                                                bundle.putBoolean(ORDER_ID_EXISTS, userData.has("orderIds"));
-                                                intent.putExtras(bundle);
-
-                                                // boxId and uuid  send
-                                                startActivity(intent);
-
-                                                progressBar.setVisibility(View.GONE);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<JsonObject> call, Throwable t) {
-
-                                        }
-                                    });
-
-
+                                    checkEmailVerification();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                                     progressBar.setVisibility(View.GONE);
@@ -148,7 +114,6 @@ public class LoginPage extends AppCompatActivity {
         });
 
     }
-
     private void showResetPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Reset Password");
@@ -206,6 +171,49 @@ public class LoginPage extends AppCompatActivity {
             }
         });
     }
+    private void checkEmailVerification() {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            boolean emailflag = firebaseUser.isEmailVerified();
+
+            if (emailflag) {
+
+                //  Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
+                Log.e("Neha", mAuth.getUid());
+
+                Call<JsonObject> call = apiInterface.getUserData(mAuth.getUid());
+                Log.e("Neha", call.request().url().toString());
+                call.enqueue(new Callback<JsonObject>() {
+                    @Override
+                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                        if (response.isSuccessful()) {
+                            JsonObject userData = response.body();
+
+
+                            Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString(UUID_KEY, mAuth.getUid());
+                            bundle.putBoolean(ORDER_ID_EXISTS, userData.has("orderIds"));
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Verifiy your email", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
  }
 
