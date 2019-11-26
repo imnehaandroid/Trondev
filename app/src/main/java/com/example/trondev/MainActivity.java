@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
 
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             boxStatus = bundle.getString(BOX_STATUS_KEY);

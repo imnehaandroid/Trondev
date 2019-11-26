@@ -165,7 +165,7 @@ public class SignUpPage extends AppCompatActivity {
     }
 
     private void sendEmailVerification() {
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+       FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
