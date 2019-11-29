@@ -8,6 +8,7 @@
     <string name="hint_box">BoxId</string>
     <string name="hint_orderId">OrderId</string>
     <string name="set_current_orderId">Current OrderId</string>
+    <string name="set_current_orderid">set Current orderId</string>
     <string name="text_forgot_password">Forgot Password?</string>
     <string name="enter_the_verification_code">Enter OTP code </string>
     <string name="orderId_exist_msg">3 Order Id\'s already exists</string>
@@ -21,5 +22,8 @@
     <string name="continue_button">Continue</string>
     <string name="txt_already_have_an_account">Already have an account?</string>
     <string name="txt_login">Login</string>
+    <string name="current_orderid">current orderId</string>
+    <string name="backimage">backImage</string>
+
 
 </resources>

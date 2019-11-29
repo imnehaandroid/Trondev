@@ -5,8 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:onClick="hideKeyboard"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/backImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_backline"
+        android:padding="10dp"
+        android:contentDescription="@string/backimage" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -70,10 +78,28 @@
                 android:textColor="@android:color/white"
                 />
 
-
+            <EditText
+                android:id="@+id/selectOrderEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:minLines="1"
+                android:drawableStart="@drawable/ic_currentorderid"
+                android:hint="@string/current_orderid"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                />
+            <Button
+                android:id="@+id/select_orderId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/set_current_orderid"
+                android:textSize="15sp"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:background="@android:color/black"
+                android:textColor="@android:color/white"/>
         </LinearLayout>
-
     </LinearLayout>
-
     <include layout="@layout/layout_progress_bar" />
 </FrameLayout>

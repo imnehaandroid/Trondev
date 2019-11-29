@@ -2,16 +2,21 @@ package com.example.trondev;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -28,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String UUID_KEY = "uuid";
     private static final String ORDER_ID_EXISTS = "order_id_exists";
 
-    EditText orderIdEt;
+    EditText orderIdEt, selectOrderEt;
     ToggleButton toggleButton;
-    Button setOrder;
+    Button setOrder, btnselectOrder;
+    ImageView backImageView;
 
     private String boxStatus, uuID;
     private int toggleValue = -1;
@@ -49,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
         toggleButton = findViewById(R.id.tb1);
         setOrder = findViewById(R.id.set_orderId);
         progressBar = findViewById(R.id.progressBar);
-
+        selectOrderEt = findViewById(R.id.selectOrderEt);
+        btnselectOrder = findViewById(R.id.select_orderId);
+        backImageView = findViewById(R.id.backImage);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -60,6 +68,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginPage.class));
+            }
+        });
+
+        btnselectOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference = FirebaseDatabase.getInstance().getReference("user").child(uuID).child("currentOrderId");
+                databaseReference.setValue(selectOrderEt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressBar.setVisibility(View.GONE);
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "set Current OrderId", Toast.LENGTH_SHORT).show();
+
+                        } else
+                            Toast.makeText(MainActivity.this, "In Failure", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+                selectOrderEt.getText().clear();
+            }
+        });
+
 
         setOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e("Neha", stringBuilder.toString());
         databaseReference = FirebaseDatabase.getInstance().getReference("user").child(uuID).child("boxStatus");
-        
+
         progressBar.setVisibility(View.VISIBLE);
         databaseReference.setValue(stringBuilder.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -179,4 +217,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void hideKeyboard(View view) {
+
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
 }
