@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String BOX_STATUS_KEY = "bo_xstatus";
     private static final String UUID_KEY = "uuid";
     private static final String ORDER_ID_EXISTS = "order_id_exists";
+    private static  int counter=0;
+    private static String var;
+    private static String buf;
 
     EditText orderIdEt, selectOrderEt;
     ToggleButton toggleButton;
@@ -80,13 +83,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseReference = FirebaseDatabase.getInstance().getReference("user").child(uuID).child("NewOrderId");
-                databaseReference.setValue(selectOrderEt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+                var = selectOrderEt.getText().toString();
+                switch (counter){
+                    case 0: buf = var + "@";
+                            break;
+
+                    case 1: buf = var + "%";
+                            break;
+
+                    case 2: buf = var + "#";
+                            break;
+
+                }
+
+                databaseReference.setValue(buf).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         progressBar.setVisibility(View.GONE);
 
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "set New OrderId", Toast.LENGTH_SHORT).show();
+                            buf = "";
+                            var = "";
+                            counter++;
+                            if (counter>2) {
+                                counter =0;
+                            }
 
                         } else
                             Toast.makeText(MainActivity.this, "In Failure", Toast.LENGTH_SHORT).show();
@@ -173,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        orderIdEt.getText().clear();
     }
 
     private void setFirebaseData() {
