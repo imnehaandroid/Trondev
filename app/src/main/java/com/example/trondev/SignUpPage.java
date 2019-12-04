@@ -65,7 +65,7 @@ public class SignUpPage extends AppCompatActivity {
     }
 
 
-    private String email, name, phonenumber, boxId;
+    private String email, name, phonenumber, boxId, password;
 
     private void registerNewUser() {
 
@@ -73,16 +73,16 @@ public class SignUpPage extends AppCompatActivity {
         name = editName.getText().toString().trim();
         phonenumber = editPhoneNumber.getText().toString().trim();
         email = editEmail.getText().toString().trim();
-        String password = editUserPassword.getText().toString().trim();
+        password = editUserPassword.getText().toString().trim();
         boxId = editBoxId.getText().toString().trim();
 
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(getApplicationContext(), "Please enter name...", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(phonenumber)) {
-
-            Toast.makeText(getApplicationContext(), "Please enter phone number!", Toast.LENGTH_LONG).show();
+        if (phonenumber.isEmpty() || phonenumber.length() < 10) {
+            editPhoneNumber.setError("Enter a valid number");
+            editPhoneNumber.requestFocus();
             return;
         }
 
@@ -94,6 +94,7 @@ public class SignUpPage extends AppCompatActivity {
 
             editEmail.setError("Invalid Email");
             editEmail.setFocusable(true);
+            return;
         }
 
         if (TextUtils.isEmpty(password)) {
@@ -118,41 +119,38 @@ public class SignUpPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            if (mAuth.getCurrentUser() != null) {
-                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            sendEmailVerification();
-                                            String boxStatus = "aaaa@,0";
-                                            User information = new User(name, email, phonenumber, boxId, boxStatus);
-                                            FirebaseUser user = mAuth.getCurrentUser();
-                                            databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    //  Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
-                                                    progressBar.setVisibility(View.GONE);
+                            sendEmailVerification();
+                            String boxStatus = "aaaa@,0";
+                            User information = new User(name, email, phonenumber, boxId, boxStatus);
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            databaseReference.child(user.getUid()).setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
 
-                                                    finish();
-                                                }
-                                            });
+                                    //    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
+                                    progressBar.setVisibility(View.GONE);
 
-                                        } else {
+                                    //Intent intent = new Intent(SignUpPage.this, LoginPage.class);
+                                    //  startActivity(intent);
 
-                                            Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
-                                            progressBar.setVisibility(View.GONE);
-                                        }
 
-                                    }
-                                });
-                            }
+                                }
+                            });
+
                         } else {
-                            if (task.getException() != null) {
-                                Toast.makeText(SignUpPage.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            }
+                            Toast.makeText(getApplicationContext(), "Registration failed! Please try again later", Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+
+
                         }
                     }
                 });
+                         editName.getText().clear();
+                         editBoxId.getText().clear();
+                         editEmail.getText().clear();
+                         editUserPassword.getText().clear();
+                         editPhoneNumber.getText().clear();
+
     }
 
     private void initializeUI() {
@@ -167,7 +165,7 @@ public class SignUpPage extends AppCompatActivity {
     }
 
     private void sendEmailVerification() {
-       FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -187,15 +185,13 @@ public class SignUpPage extends AppCompatActivity {
 
     }
 
-    public  void hideKeyboard(View view){
+    public void hideKeyboard(View view) {
 
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (inputMethodManager != null) {
-            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
-
 
 }
 

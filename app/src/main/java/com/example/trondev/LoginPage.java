@@ -114,6 +114,8 @@ public class LoginPage extends AppCompatActivity {
                         });
             }
         });
+             userId.getText().clear();
+             userPassword.getText().clear();
 
     }
     private void showResetPasswordDialog() {

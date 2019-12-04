@@ -8,7 +8,7 @@
     <string name="hint_box">BoxId</string>
     <string name="hint_orderId">OrderId</string>
     <string name="set_current_orderId">Current OrderId</string>
-    <string name="set_current_orderid">set Current orderId</string>
+    <string name="set_current_orderid">Set New OrderId</string>
     <string name="text_forgot_password">Forgot Password?</string>
     <string name="enter_the_verification_code">Enter OTP code </string>
     <string name="orderId_exist_msg">3 Order Id\'s already exists</string>
@@ -17,13 +17,19 @@
     <string name="togglebutton_1">ToggleButton 1</string>
     <string name="on">On</string>
     <string name="off">Off</string>
-    <string name="set_orderid">set orderId</string>
+    <string name="set_orderid">set current OrderId</string>
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="continue_button">Continue</string>
     <string name="txt_already_have_an_account">Already have an account?</string>
     <string name="txt_login">Login</string>
-    <string name="current_orderid">current orderId</string>
+    <string name="new_orderid">New OrderId</string>
     <string name="backimage">backImage</string>
+    <string name="submit">SUBMIT</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="parcelboxlogo">parcelboxLogo</string>
+    <string name="logo">logo</string>
+    <string name="get_started">Get Started</string>
 
 
 </resources>

@@ -21,7 +21,8 @@
             android:layout_height="43dp"
             android:layout_margin="40dp"
             android:gravity="center_horizontal"
-            android:src="@drawable/parcellogo" />
+            android:src="@drawable/parcellogo"
+            android:contentDescription="@string/parcelboxlogo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_mail"
+                    android:drawableStart="@drawable/ic_mail"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
@@ -73,7 +74,7 @@
                 android:gravity="center|right"
                 android:text="@string/text_forgot_password"
                 android:textColor="#1637DD"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:textStyle="bold"/>
 
 
@@ -86,9 +87,9 @@
                 android:background="@drawable/shape"
                 android:backgroundTint="@android:color/black"
                 android:padding="10dp"
-                android:text="SUBMIT"
+                android:text="@string/submit"
                 android:textColor="@android:color/white"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -101,18 +102,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Don't have an account?"
+                    android:text="@string/don_t_have_an_account"
                     android:textColor="#1D1D1D"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/goToSignUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Sign Up"
+                    android:text="@string/sign_up"
                     android:textColor="#1637DD"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

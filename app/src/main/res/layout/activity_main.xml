@@ -24,60 +24,24 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="92dp"
-            android:layout_marginTop="15dp"
-            android:padding="25dp"
-            android:src="@drawable/parcellogo" />
+            android:padding="20dp"
+            android:src="@drawable/parcellogo"
+            android:contentDescription="@string/parcelboxlogo" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:padding="5dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layout_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/edit_orderId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_orderId"
-                    android:minLines="1"
-                    android:lines="1"
-                    android:drawableLeft="@drawable/ic_orderid"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                android:id="@+id/set_orderId"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="set orderId"
-                android:textSize="15dp"
-                android:layout_margin="20dp"
-                android:textStyle="bold"
-                android:background="@android:color/black"
-                android:textColor="@android:color/white"/>
-            <ToggleButton
-                android:id="@+id/tb1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton 1"
-                android:background="@drawable/tooglebuttoncolor"
-                android:layout_margin="20dp"
-                android:textOn="On"
-                android:textOff="Off"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
+                android:text="Step-1"
+                android:layout_marginLeft="15dp"
                 />
-
             <EditText
                 android:id="@+id/selectOrderEt"
                 android:layout_width="match_parent"
@@ -85,7 +49,7 @@
                 android:ems="10"
                 android:minLines="1"
                 android:drawableStart="@drawable/ic_currentorderid"
-                android:hint="@string/current_orderid"
+                android:hint="@string/new_orderid"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
                 />
@@ -99,6 +63,55 @@
                 android:textStyle="bold"
                 android:background="@android:color/black"
                 android:textColor="@android:color/white"/>
+
+               <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Step-2"
+                android:layout_marginLeft="15dp"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_orderId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_orderId"
+                    android:minLines="1"
+                    android:lines="1"
+                    android:drawableStart="@drawable/ic_orderid"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/set_orderId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/set_orderid"
+                android:textSize="15sp"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:background="@android:color/black"
+                android:textColor="@android:color/white"/>
+            <ToggleButton
+                android:id="@+id/tb1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/togglebutton_1"
+                android:background="@drawable/tooglebuttoncolor"
+                android:layout_margin="20dp"
+                android:textOn="@string/on"
+                android:textOff="@string/off"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                />
+
+
         </LinearLayout>
     </LinearLayout>
     <include layout="@layout/layout_progress_bar" />

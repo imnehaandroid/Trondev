@@ -18,14 +18,16 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            android:contentDescription="@string/logo" />
 
         <ImageView
             android:id="@+id/splashImage"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:src="@drawable/boxbacklogo" />
+            android:src="@drawable/boxbacklogo"
+            android:contentDescription="@string/parcelboxlogo" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,7 +44,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape"
             android:backgroundTint="#FFFFFF"
-            android:text="Get Started"
+            android:text="@string/get_started"
             android:textColor="@android:color/black" />
     </LinearLayout>
 

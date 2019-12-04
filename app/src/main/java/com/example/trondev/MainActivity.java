@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
         btnselectOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference = FirebaseDatabase.getInstance().getReference("user").child(uuID).child("currentOrderId");
+                databaseReference = FirebaseDatabase.getInstance().getReference("user").child(uuID).child("NewOrderId");
                 databaseReference.setValue(selectOrderEt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         progressBar.setVisibility(View.GONE);
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "set Current OrderId", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "set New OrderId", Toast.LENGTH_SHORT).show();
 
                         } else
                             Toast.makeText(MainActivity.this, "In Failure", Toast.LENGTH_SHORT).show();
